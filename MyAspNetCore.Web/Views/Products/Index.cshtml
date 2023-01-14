@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<ProductViewModel>
+<h1>Ürünler</h1>
+
+
+@if (TempData["status"]!=null)
+{
+    <div class="alert alert-primary" role="alert">
+  @TempData["status"]
+</div>
+}
+
+
+<a asp-controller="Products" asp-action="Add" >Ürün ekle</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>İsim</th>
+            <th>Fİyat</th>
+            <th>Stok</th>
+            <th>Barcode</th>
+             <th>IsPublish</th>
+              <th>Expire</th>
+              <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>  
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>@item.Stock</td>
+            <td>@item.Barcode</td>
+            <td>@item.IsPublish</td>
+            <td>@item.Expire</td>
+                <td>@if (item.Description.Length > 20)
+                    {
+                        @item.Description.Substring(0,20)<text>...</text>
+                    }
+                    else
+                    {
+                        @item.Description
+                    }
+                </td>
+            <td><a asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a></td>
+            <td><a asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
+

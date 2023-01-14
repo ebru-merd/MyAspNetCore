@@ -1,0 +1,36 @@
+﻿@using MyAspNetCore.Web.Controllers
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1> Ornek Controller Index</h1>
+
+@{
+    var name = ViewBag.name;
+}
+
+<p>@name</p>
+<p>@ViewBag.name</p>
+
+<hr />
+
+<p>@ViewData["age"]</p>
+
+<h1>İsimler</h1>
+@foreach (var item in ViewData["names"] as List<string>)
+{
+   <p>@item</p>
+    
+}
+
+<p> @ViewBag.person.Id - @ViewBag.person.Name - @ViewBag.person.Age </p>
+
+<hr />
+
+
+@model List<Product2>;
+
+    @foreach (var item in Model)
+    {
+        <p>@item.Id - @item.Name</p>
+    }
